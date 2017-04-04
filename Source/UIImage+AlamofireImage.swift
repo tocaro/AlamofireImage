@@ -154,7 +154,7 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, af_isOpaque, 0.0)
         drawInRect(CGRect(origin: CGPointZero, size: size))
 
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
 
         return scaledImage
@@ -191,7 +191,7 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         drawInRect(CGRect(origin: origin, size: scaledSize))
 
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
 
         return scaledImage
@@ -223,7 +223,7 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, af_isOpaque, 0.0)
         drawInRect(CGRect(origin: origin, size: scaledSize))
 
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
 
         return scaledImage
@@ -255,7 +255,7 @@ extension UIImage {
 
         drawInRect(CGRect(origin: CGPointZero, size: size))
 
-        let roundedImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
 
         return roundedImage
@@ -287,7 +287,7 @@ extension UIImage {
 
         squareImage.drawInRect(CGRect(origin: CGPointZero, size: squareImage.size))
 
-        let roundedImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
 
         return roundedImage
@@ -339,13 +339,3 @@ extension UIImage {
 }
 
 #endif
-
-// MARK: - Private - Graphics Context Helpers
-
-private func UIGraphicsGetImageFromCurrentImageContextUnwrapped() -> UIImage {
-    #if swift(>=2.3)
-        return UIGraphicsGetImageFromCurrentImageContext()!
-    #else
-        return UIGraphicsGetImageFromCurrentImageContext()
-    #endif
-}
